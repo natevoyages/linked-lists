@@ -61,9 +61,30 @@ function createLinkedList(){
         return foundNode;
 
     }
+    const pop = () =>{
+        if(headNode.value == null){
+            return;
+        }
+        else if(headNode.nextNode == null){
+            headNode.value = null
+        }
+        else if(headNode.nextNode == tailNode){
+            headNode.nextNode = null
+        }
+        else{
+            let newTail = at(listSize - 2);
+            newTail.nextNode = null;
+            tailNode = newTail;
+        }
+        listSize--;
+        
+    }
 
     const toString = function() {
         let string = '';
+        if (headNode.value === null){
+            return string = 'null';
+        }
         printNodeRec(headNode);
 
         function printNodeRec(node){
@@ -79,7 +100,7 @@ function createLinkedList(){
 
 
 
-    return { append, prepend, toString, at, get head(){
+    return { append, prepend, toString, at, pop, get head(){
         return headNode
         },
         get tail(){
@@ -105,44 +126,3 @@ linkedList.append(800);
 
 
 
-/* function createLinkedList(){
-    let headNode = createNode();
-    let tailNode = createNode();
-
-    let append = function(value){
-        if(headNode.value == null){
-            headNode.value = value;
-            return;
-        }
-        else if(headNode.nextNode == null){
-            tailNode.value = value;
-            headNode.nextNode = tailNode;
-        }
-        else{
-            let newNode = createNode();
-            newNode.value = value;
-            tailNode.nextNode = newNode;
-            tailNode = newNode;
-
-        }
-    }
-    return { append, get head(){
-        return headNode
-        },
-        get tail(){
-            return tailNode;
-        }
-    } 
-}
-
-function createNode(){
-    let value = null;
-    let nextNode = null;
-    return{value, nextNode};
-}
-
-let linkedList = createLinkedList();
-linkedList.append(6);
-linkedList.append(100);
-linkedList.append(800);
-*/
