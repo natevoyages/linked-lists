@@ -40,6 +40,28 @@ function createLinkedList(){
         listSize++;
     }
 
+    const at = function(index){
+        let count = 0;
+        let foundNode = null;
+
+        foundNode = findNode(headNode);
+
+        function findNode(node){
+            if (index == listSize || index < 0){
+                return;
+            }
+            else if (count == index){
+                return node;
+            }
+            else{
+                count++;
+                return findNode(node.nextNode);
+            }
+        }
+        return foundNode;
+
+    }
+
     const toString = function() {
         let string = '';
         printNodeRec(headNode);
@@ -57,7 +79,7 @@ function createLinkedList(){
 
 
 
-    return { append, prepend, toString, get head(){
+    return { append, prepend, toString, at, get head(){
         return headNode
         },
         get tail(){
@@ -80,6 +102,7 @@ linkedList.append(6);
 linkedList.append(100);
 linkedList.append(90);
 linkedList.append(800);
+
 
 
 /* function createLinkedList(){
