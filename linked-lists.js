@@ -80,6 +80,22 @@ function createLinkedList(){
         
     }
 
+    const contains =  (value)=>{
+        let found = false;
+        findValue(headNode, value);
+        function findValue(node, value){
+            if (node.value == value){
+                found = true;
+                return;
+            }
+            if(node.nextNode === null){
+                return;
+            }
+            findValue(node.nextNode, value);
+        }
+        return found;
+    }
+
     const toString = function() {
         let string = '';
         if (headNode.value === null){
@@ -100,15 +116,10 @@ function createLinkedList(){
 
 
 
-    return { append, prepend, toString, at, pop, get head(){
-        return headNode
-        },
-        get tail(){
-            return tailNode;
-        }, 
-        get size(){
-            return listSize;
-        }
+    return { append, prepend, toString, at, pop, contains,
+        get head(){return headNode;},
+        get tail(){return tailNode;}, 
+        get size(){return listSize;}
     } 
 }
 
