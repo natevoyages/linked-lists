@@ -131,9 +131,31 @@ function createLinkedList(){
         return string;
     }
 
+    const insertAt = function(value, index){
+        if (index == listSize){
+            append(value);
+            return;
+        } 
+        else if (index == 0){
+            prepend(value);
+            return;
+        }
+        else if(index > listSize){
+            console.log('Out of range')
+            return;
+        }
+        let newNode = createNode();
+        let next = at(index);
+        let prev = at(index - 1);
+        prev.nextNode = newNode;
+        newNode.value = value;
+        newNode.nextNode = next;
+        listSize++;
+    }
 
 
-    return { append, prepend, toString, at, pop, contains,find,
+
+    return { append, prepend, toString, at, pop, contains,find, insertAt,
         get head(){return headNode;},
         get tail(){return tailNode;}, 
         get size(){return listSize;}
