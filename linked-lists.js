@@ -153,9 +153,30 @@ function createLinkedList(){
         listSize++;
     }
 
+    const removeAt = function( index){
+        if (index == listSize - 1){
+            pop();
+            return;
+        } 
+        else if (index == 0){
+            let next = at(index + 1);
+            headNode = next;
+            listSize--;
+            return;
+        }
+        else if(index >= listSize){
+            console.log('Out of range')
+            return;
+        }
+        let next = at(index + 1);
+        let prev = at(index - 1);
+        prev.nextNode = next;
+        listSize--;
+    }
 
 
-    return { append, prepend, toString, at, pop, contains,find, insertAt,
+    return { append, prepend, toString, at, pop,
+         contains,find, insertAt, removeAt,
         get head(){return headNode;},
         get tail(){return tailNode;}, 
         get size(){return listSize;}
