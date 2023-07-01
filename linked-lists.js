@@ -61,7 +61,7 @@ function createLinkedList(){
         return foundNode;
 
     }
-    const pop = () =>{
+    const pop = function(){
         if(headNode.value == null){
             return;
         }
@@ -80,7 +80,7 @@ function createLinkedList(){
         
     }
 
-    const contains =  (value)=>{
+    const contains =  function(value){
         let found = false;
         findValue(headNode, value);
         function findValue(node, value){
@@ -96,27 +96,44 @@ function createLinkedList(){
         return found;
     }
 
+    const find = function(value){
+        let count = 0;
+        findIndex(headNode, value);
+        function findIndex(node, value){
+            if(count == listSize){
+                count = null;
+                return;
+            }
+            else if (node.value == value){
+                return;
+            }
+            count++;
+            findIndex(node.nextNode, value);
+        }
+        return count;
+    }
+
     const toString = function() {
         let string = '';
         if (headNode.value === null){
             return string = 'null';
         }
-        printNodeRec(headNode);
+        stringNodes(headNode);
 
-        function printNodeRec(node){
+        function stringNodes(node){
             if(node.nextNode === null){
                 string += `( ${node.value} ) -> `;
                 return string += 'null';
             }
             string += `( ${node.value} ) -> `;
-            printNodeRec(node.nextNode);
+            stringNodes(node.nextNode);
         }
         return string;
     }
 
 
 
-    return { append, prepend, toString, at, pop, contains,
+    return { append, prepend, toString, at, pop, contains,find,
         get head(){return headNode;},
         get tail(){return tailNode;}, 
         get size(){return listSize;}
